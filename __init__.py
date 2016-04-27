@@ -21,6 +21,14 @@ def homepage(text = ''):
 @app.route('/dashboard/')
 def dashboard():
     return render_template("dashboard.html", TOPIC_DICT = TOPIC_DICT)
+
+
+
+
+@app.route('/support/')
+def support():
+    return render_template("support.html")
+	
 	
 
 @app.route('/slashboard/')
