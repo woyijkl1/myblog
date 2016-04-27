@@ -1,1 +1,1 @@
-程序设计实训 博客搭建
+my blog for programming homework
