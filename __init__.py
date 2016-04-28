@@ -1,5 +1,6 @@
 from flask import Flask, render_template, flash, request, url_for,redirect,session
-from wtforms import Form, BooleanField, TextField, PasswordField, validators
+from wtforms import Form, BooleanField, TextField, PasswordField, validators,TextAreaField
+from wtforms.validators import Required
 from passlib.hash import sha256_crypt
 from MySQLdb import escape_string as thwart
 from content_management import Content
@@ -8,10 +9,13 @@ from passlib.hash import sha256_crypt
 from functools import wraps
 import gc
 
+
+
 TOPIC_DICT = Content()
 
 
 app = Flask(__name__)
+
 
 @app.route('/<path:text>/')
 @app.route('/')
@@ -98,6 +102,38 @@ def login_page():
 		
 
 
+
+
+
+
+class blogForm(Form):
+	body = TextAreaField("what's on yout mind?",validators=[Required()],id='contentcode')
+
+
+
+
+@app.route('/blog/', methods=["GET","POST"])
+def blog():
+	try:
+		form = blogForm(request.form)
+		if request.method == "POST" and form.validate():
+			if session['logged_in'] == True :
+				c, conn = connection()
+				data = form.body.data
+				username = session['username']
+				c.execute("INSERT INTO blogs (username,  body ) VALUES (%s, %s)",
+							  (thwart(username), thwart(data)))
+				conn.commit()
+				c.close()
+				conn.close()
+				gc.collect()
+				flash("new blog article accepted")
+			return redirect(url_for('blog'))
+		else:
+			return render_template("blog.html", form=form)
+	except Exception as e:
+		return (str(e))
+	
 
 class RegistrationForm(Form):
     username = TextField('Username', [validators.Length(min=4, max=20)])
