@@ -1,3 +1,4 @@
+#coding:utf-8
 from flask import Flask, render_template, flash, request, url_for,redirect,session
 from wtforms import Form, BooleanField, TextField, PasswordField, validators,TextAreaField
 from wtforms.validators import Required
@@ -8,6 +9,7 @@ from dbconnect import connection
 from passlib.hash import sha256_crypt
 from functools import wraps
 import gc
+
 
 
 
@@ -122,7 +124,7 @@ def blog():
 				data = form.body.data
 				username = session['username']
 				c.execute("INSERT INTO blogs (username,  body ) VALUES (%s, %s)",
-							  (thwart(username), thwart(data)))
+							  (thwart(username.encode('utf-8')), thwart(data.encode('utf-8'))))
 				conn.commit()
 				c.close()
 				conn.close()
