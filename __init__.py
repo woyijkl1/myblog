@@ -19,10 +19,47 @@ TOPIC_DICT = Content()
 app = Flask(__name__)
 
 
+# @app.route('/<path:text>/')
+# @app.route('/')
+# def homepage(text = ''):
+    # return render_template("mian.html")
+
+
 @app.route('/<path:text>/')
 @app.route('/')
 def homepage(text = ''):
-    return render_template("mian.html")
+	try:
+		c, conn = connection()
+		c.execute("select body from blogs where username='woyijkl2'")
+		results = c.fetchall()
+		for result in results:
+			result[0].replace('\r\n', '\n')
+		c.close()
+		conn.close()
+		return render_template("xuexi.html" , results = results)
+	except Exception as e:
+		return (str(e))
+
+
+
+
+# @app.route('/<path:text>/')
+# @app.route('/')
+# def homepage(text = ''):
+	# try:
+		# c, conn = connection()
+		# c.execute("select body from blogs where username='woyijkl1+'")
+		# results = c.fetchall()
+		# c.close()
+		# conn.close()
+		# return (str(results))
+	# except Exception as e:
+		# return (str(e))
+
+
+
+
+
 
 @app.route('/dashboard/')
 def dashboard():
@@ -30,12 +67,10 @@ def dashboard():
 
 
 
-
 @app.route('/support/')
 def support():
     return render_template("support.html")
-	
-	
+
 
 @app.route('/slashboard/')
 def slashboard():
