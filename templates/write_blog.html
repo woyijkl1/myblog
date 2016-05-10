@@ -1,0 +1,65 @@
+{% extends "header.html" %}
+{% block body %}
+
+
+<style type="text/css">
+        #contentcode {
+            height: 200px;
+			width: 100%;
+        }
+    </style>
+
+<body>
+	<div  class = "container">
+		<h4>blog</h4>
+		<br>
+		{% macro render_field(field) %}
+		<div>
+		  <dl >{{ field.label }}
+		  <dd >{{ field(**kwargs)|safe }}
+		  {% if field.errors %}
+			<ul class=errors>
+			{% for error in field.errors %}
+			  <li>{{ error }}</li>
+			{% endfor %}
+			</ul>
+		  {% endif %}
+		  </dd>
+		 </div>
+		{% endmacro %}
+		
+		
+		
+		
+		
+		<form method=post action="/write_blog/"   >
+			<dl >
+			
+				{{render_field(form.body)}}
+			</dl>
+			<p><button type="submit" class="btn btn-default">Submit</button></p>
+		</form>
+		
+		{% if error %}
+			<p class="error"><strong>Error:</strong>{{error}}</p>
+		{% endif %}
+
+	</div>
+	
+
+	
+
+	
+	
+	
+	
+</body>
+
+
+
+
+
+
+
+{% endblock %}
+		

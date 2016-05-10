@@ -6,25 +6,166 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#basics" aria-controls="basics" role="tab" data-toggle="tab">Basics</a></li>
-    <li role="presentation"><a href="#wdev" aria-controls="wdev" role="tab" data-toggle="tab">Web Dev</a></li>
-    <li role="presentation"><a href="#dan" aria-controls="dan" role="tab" data-toggle="tab">Data Analysis</a></li>
+    <li role="presentation" class="active"><a href="#basics" aria-controls="basics" role="tab" data-toggle="tab">介绍</a></li>
+    <li role="presentation"><a href="#wdev" aria-controls="wdev" role="tab" data-toggle="tab">python</a></li>
+    <li role="presentation"><a href="#dan" aria-controls="dan" role="tab" data-toggle="tab">资料推荐</a></li>
 
   </ul>
 
   <!-- Tab panes -->
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane fade in active" id="basics">
-	<ul>
-	   <li>dfadsfasf</li>
-	   <li>jjh</li>
-	   <li>assggg</li>
-	</ul>
-  </div>
-  
-  <div role="tabpanel" class="tab-pane fade" id="wdev">web dev</div>
+	<br/>
+	<div  class="list-group" >
+		<a  class="list-group-item active">
+			<h1  class="list-group-item-heading">博客使用说明：</h1>
+		</a>
+		
+	</div>
+	
+	<div  class="list-group" >
+		<a  class="list-group-item active">
+			<h4  class="list-group-item-heading">查看ta写的blog：</h1>
+		</a>
+		<div align="center" class="list-group" >
+		<a  class="list-group-item active">
+			<h4  class="list-group-item-heading">在user blog页面，可以查看所有作者的blog记录</h4>
+			<br/>
+			<h4 class="list-group-item-heading">如果你也想写自己的blog</h4>
+			<br/>
+			<h4 class="list-group-item-heading">请先在右上角的sign up中注册</h4>
+			<br/>
+			<h4 class="list-group-item-heading">注意：注册时用户名仅限英文</h4>
+			<br/>
+			<h4 class="list-group-item-heading">然后就可以开始你的blog之旅啦</h4>
+			<br/>
+		</a>
+		</div>
+	</div>
+	
+	
+	<div  class="list-group" >
+		<a  class="list-group-item active">
+			<h4  class="list-group-item-heading">添加自己的blog：</h1>
+		</a>
+		<div align="center" class="list-group" >
+		<a  class="list-group-item active">
+			<h4  class="list-group-item-heading">首先，需要拥有自己的账号（如果没有请先sign up）</h4>
+			<br/>
+			<h4 class="list-group-item-heading">登陆之后在右上角戳“我的博客”</h4>
+			<br/>
+			<h4 class="list-group-item-heading">在myblog页面，可以看到“写博客”，点进去</h4>
+			<br/>
+			<h4 class="list-group-item-heading">当当当！到达添加blog页面</h4>
+			<br/>
+		</a>
+		</div>
+	</div>
+	
+	<div  class="list-group" >
+		<a  class="list-group-item active">
+			<h4  class="list-group-item-heading">BTW：</h1>
+		</a>
+		<div align="center" class="list-group" >
+		<a  class="list-group-item active">
+			<h4  class="list-group-item-heading">introduction 中的视频以及其他资源</h4>
+			<br/>
+			<h4 class="list-group-item-heading">可能需要翻墙</h4>
+			<br/>
+			<h4 class="list-group-item-heading">想看视频并且没有梯子同学</h4>
+			<br/>
+			<h4 class="list-group-item-heading">可以私戳，尽量提供ss</h4>
+			<br/>
+		</a>
+		</div>
+	</div>
 
-  <div role="tabpanel" class="tab-pane fade" id="dan">Data analysis!#Q$@!#</div>
+	
+    </div>
+	
+	
+	
+	
+	
+  
+  <div  role="tabpanel" class="tab-pane fade" id="wdev">
+	<div class="page-header">
+		<h1>Python书籍安利</h1>
+	</div>
+	<br/>
+	<br/>
+
+	 <div style = "margin-left:35%;Width:100%"  class="row">
+
+	  <div class="col-sm-6 col-md-4">
+		<div  class="thumbnail">
+		  <img src="{{ url_for('static', filename='images/byte.png')}}" alt="Responsive image">
+		  <div class="caption">
+			<h3 align="center" >Python 简明教程</h3>
+			<p align="center">a free book on programming using the Python language. If all you know about computers is how to save text files, then this is the book for you.</p>
+			<p align="center">< <a href="http://python.swaroopch.com/" class="btn btn-default" role="button">了解更多</a></p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+
+	
+	
+	 <div style = "margin-left:35%;Width:100%"  class="row">
+
+	  <div class="col-sm-6 col-md-4">
+		<div  class="thumbnail">
+		  <img src="{{ url_for('static', filename='images/flask.png')}}" alt="Responsive image">
+		  <div class="caption">
+			<h3 align="center" >flask</h3>
+			<p align="center">The book centers around the development of Flasky, a social blogging application released as open source under the MIT license.</p>
+			<p align="center">< <a href="https://github.com/miguelgrinberg/flasky" class="btn btn-default" role="button">了解更多</a></p>
+		  </div>
+		</div>
+	  </div>
+	</div>	
+
+	
+	
+	
+	 <div style = "margin-left:35%;Width:100%"  class="row">
+
+	  <div class="col-sm-6 col-md-4">
+		<div  class="thumbnail">
+		  <img src="{{ url_for('static', filename='images/scraping.png')}}" alt="Responsive image">
+		  <div class="caption">
+			<h3 align="center" >scraping</h3>
+			<p align="center">this book not only teaches basic web scraping mechanics, but also delves into more advanced topics, such as analyzing raw data or using scrapers for frontend website testing. </p>
+			<p align="center">< <a href="http://shop.oreilly.com/product/0636920034391.do" class="btn btn-default" role="button">了解更多</a></p>
+		  </div>
+		</div>
+	  </div>
+	</div>	
+
+
+
+ </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <div role="tabpanel" class="tab-pane fade" id="dan">
+  
+  
+  	<div class="page-header">
+		<h1>flask 开发blog视频</h1>
+	</div>
+   <div class="embed-responsive embed-responsive-16by9">
+   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Lv1fv-HmkQo?list=PLQVvvaa0QuDc_owjTbIY4rbgXOFkUYOUB" frameborder="0" allowfullscreen></iframe></div><br>
+
 
 </div>
 

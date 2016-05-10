@@ -19,27 +19,31 @@ TOPIC_DICT = Content()
 app = Flask(__name__)
 
 
-# @app.route('/<path:text>/')
-# @app.route('/')
-# def homepage(text = ''):
-    # return render_template("mian.html")
-
-
 @app.route('/<path:text>/')
 @app.route('/')
 def homepage(text = ''):
-	try:
-		c, conn = connection()
-		c.execute("select body from blogs where username='woyijkl2'")
-		results = c.fetchall()
-		for result in results:
-			result[0].replace('\r\n', '\n')
-		c.close()
-		conn.close()
-		return render_template("xuexi.html" , results = results)
-	except Exception as e:
-		return (str(e))
+    return render_template("support.html")
 
+
+# @app.route('/<path:text>/')
+# @app.route('/')
+# def homepage(text = ''):
+	# if 'logged_in' in session:
+		# try:
+			# c, conn = connection()
+			# username = session['username']
+			# c.execute("select body from blogs where username = %s",username.encode('utf-8'))
+			# results = c.fetchall()
+			# for result in results:
+				# result[0].replace('\r\n', '\n')
+			# c.close()
+			# conn.close()
+			# return render_template("xuexi.html" , results = results)
+		# except Exception as e:
+			# return (str(e))
+	# else:
+		# results = []
+		# return render_template("support.html" )
 
 
 
@@ -58,6 +62,19 @@ def homepage(text = ''):
 
 
 
+@app.route('/userBlog/')
+def userBlog():
+	try:
+		c, conn = connection()
+		c.execute("select username from users ")
+		results = c.fetchall()
+		c.execute("select username, body,time from blogs order by username ,time desc")
+		blog = c.fetchall()
+		c.close()
+		conn.close()
+		return render_template("userBlog.html", results = results , blog = blog)
+	except Exception as e:
+		return (str(e))
 
 
 
@@ -123,7 +140,7 @@ def login_page():
                 session['username'] = request.form['username']
 
                 flash("You are now logged in")
-                return redirect(url_for("dashboard"))
+                return redirect(url_for("myblog"))
 
             else:
                 error = "Invalid credentials, try again."
@@ -141,16 +158,38 @@ def login_page():
 
 
 
+@app.route('/myblog/', methods=["GET","POST"])
+def myblog():
+	if 'logged_in' in session:
+		try:
+			c, conn = connection()
+			username = session['username']
+			c.execute("select body,time from blogs where username = %s order by time desc",username.encode('utf-8'))
+			results = c.fetchall()
+			for result in results:
+				result[0].replace('\r\n', '\n')
+			c.close()
+			conn.close()
+			return render_template("myblog.html" , results = results)
+		except Exception as e:
+			return (str(e))
+	else:
+		flash("you need to log in")
+		return redirect(url_for('login_page'))  
+
+
+
 
 
 class blogForm(Form):
-	body = TextAreaField("what's on yout mind?",validators=[Required()],id='contentcode')
+	body = TextAreaField("what's on your mind?",validators=[Required()],id='contentcode')
 
 
 
 
-@app.route('/blog/', methods=["GET","POST"])
-def blog():
+@app.route('/write_blog/', methods=["GET","POST"])
+@login_required
+def write_blog():
 	try:
 		form = blogForm(request.form)
 		if request.method == "POST" and form.validate():
@@ -165,9 +204,9 @@ def blog():
 				conn.close()
 				gc.collect()
 				flash("new blog article accepted")
-			return redirect(url_for('blog'))
+			return redirect(url_for('write_blog'))
 		else:
-			return render_template("blog.html", form=form)
+			return render_template("write_blog.html", form=form)
 	except Exception as e:
 		return (str(e))
 	
